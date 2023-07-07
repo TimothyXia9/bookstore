@@ -23,6 +23,7 @@ urlpatterns = [
 
 # 前端显示media下的图片
 urlpatterns += img_static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += img_static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
 
 # 404
 handler404 = views.page_not_found

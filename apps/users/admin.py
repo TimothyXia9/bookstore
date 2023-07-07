@@ -56,11 +56,24 @@ class OrderAdmin(admin.ModelAdmin):
         'state',
     )
 
+    def get_readonly_fields(self, request, obj=None):
+        readonly_fields = self.readonly_fields
+#设置部分字段只读
+        if obj:  # 编辑现有对象时，设置只读字段
+            readonly_fields += (
+                'user',
+                'payment_method',
+                'payment_amount',
+                'paid',
+                'created_time',
+                'finished_time',
+            )
+        return readonly_fields
+
     ordering = (
         'user',
         'recipient',
     )
 
-    search_fields = ('user', )
 
     list_filter = ('created_time', )
