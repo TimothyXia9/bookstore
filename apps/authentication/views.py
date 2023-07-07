@@ -86,8 +86,6 @@ class LoginView(View):
                                     password=self.decrypt(request, cd['password']))  # 验证是否匹配
                 if user is not None:
                     # 实现记住功能
-                    if cd['remember']:
-                        request.session.set_expiry(60 * 60 * 24)
                     login(request, user)
                     redirect_url = request.POST.get('next', '')
                     if redirect_url:
