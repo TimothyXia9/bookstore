@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='userprofile',
             name='avatar',
-            field=models.ImageField(default='avatar/1.png', storage=apps.utils.image_storage.ImageStorage(), upload_to='avatar/%Y/%m', verbose_name='头像'),
+            field=models.ImageField(default='avatar/1.jpg', storage=apps.utils.image_storage.ImageStorage(), upload_to='avatar/%Y/%m', verbose_name='头像'),
         ),
     ]

@@ -8,7 +8,7 @@ class UserProfile(AbstractUser):
     avatar = models.ImageField(
         upload_to='avatar/%Y/%m',
         storage=ImageStorage(),
-        default='avatar/1.png',
+        default='avatar/1.jpg',
         verbose_name='头像')
 
     class Meta:
