@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include,path
 from . import views
 
 app_name = 'carts'
@@ -12,4 +12,5 @@ urlpatterns = [
     path('remove-checked', views.remove_checked_items, name='remove-checked'),
     path('settlement', views.cart_settlement, name='settlement'),
     path('item-checked/<str:option>/<int:item_id>', views.item_checked, name='item-checked'),
+    # path('setaddr', views.setaddr, name='setaddr'),
 ]

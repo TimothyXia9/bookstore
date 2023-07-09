@@ -112,3 +112,7 @@ class Order(models.Model):
         self.state = 'F'
         self.finished_time = timezone.now()
         self.save()
+        
+    def cancel(self):
+        if(self.state == 'P'):
+            self.delete()

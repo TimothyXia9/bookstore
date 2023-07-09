@@ -50,7 +50,7 @@ class SettingsView(LoginRequiredMixin, View):
                 messages.info(request, '地址修改成功')
             else:
                 messages.info(request, recipient_form.errors)
-        elif option == 'add-recipient':  # 添加地址
+        elif option == 'add-recipient' or 'no-shipping-info':  # 添加地址
             if recipient_form.is_valid():
                 recipient = user_models.Recipient()
                 recipient.user = request.user
@@ -133,4 +133,8 @@ class OrderView(LoginRequiredMixin, View):
 @login_required
 def confirm_order(request, order_id):
     request.user.order.get(id=order_id).confirm()
+    return HttpResponseRedirect(reverse('user:order'))
+
+def cancel_order(request, order_id):
+    request.user.order.get(id=order_id).cancel()
     return HttpResponseRedirect(reverse('user:order'))

@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import render, get_object_or_404, reverse,redirect
 from django.contrib.auth.decorators import login_required
 from . import forms as cart_forms
 from apps.books import models as book_models
@@ -46,10 +46,17 @@ def cart_remove(request, item_id):
     request.user.cart.remove(item_id)
     return HttpResponseRedirect(reverse('cart:detail'))
 
+@login_required
+def setaddr(request):
+    return redirect('users:settings-get')
 
 # 结算页面
 @login_required
 def cart_settlement(request):
+    recipient = request.user.recipient.order_by('-default').all()
+    if not recipient:
+        return redirect(reverse('cart:setaddr'))
+    
     settlement_form = cart_forms.SettlementForm()
     recipient = request.user.recipient.order_by('-default').all()
     cart = request.user.cart
