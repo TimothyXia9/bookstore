@@ -72,8 +72,8 @@ class SettingsView(LoginRequiredMixin, View):
                 messages.info(request, '昵称修改失败，请重试')
         elif option == 'change-password':  # 更改密码
             if change_password_form.is_valid():
-                # request.user.set_password(change_password_form.password.data)
-                change_password_form=user_forms.ChangePasswordForm(request.POST)
+                request.user.set_password(change_password_form.new_password.data)
+                # change_password_form=user_forms.ChangePasswordForm(request.POST)
                 messages.info(request, '密码更改成功')
             else:
                 messages.info(request, '密码更改失败，请重试')

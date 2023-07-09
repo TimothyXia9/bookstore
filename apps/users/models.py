@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.hashers import make_password
 from apps.utils.image_storage import ImageStorage
 
 
@@ -29,7 +30,10 @@ class UserProfile(AbstractUser):
 
     def get_finished_orders(self):
         return self.order.filter(state='F').all()
-
+    
+    def change_password(self, new_password):
+        self.password = make_password(new_password)
+        self.save()
 
 class Recipient(models.Model):
     user = models.ForeignKey(
