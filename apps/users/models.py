@@ -54,6 +54,9 @@ class Recipient(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+    def delete_recipient(self):
+        self.delete()
 
 
 class Order(models.Model):
